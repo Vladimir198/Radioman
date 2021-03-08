@@ -11,7 +11,8 @@ public class RadioTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/dataForNextRS.csv")
     void nextRadioStation(int maxRadioStation, int currentRadioStation, boolean on, int expected) {
-        Radio radio = new Radio(maxRadioStation,currentRadioStation,on);
+        Radio radio = new Radio(maxRadioStation,0,currentRadioStation,
+                100,0,0,on);
         radio.next();
 
         assertEquals(expected, radio.getCurrentRadioStation());
@@ -20,7 +21,8 @@ public class RadioTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/dataForNext.csv")
     void prevRadioStation(int maxRadioStation, int currentRadioStation, boolean on, int expected) {
-        Radio radio = new Radio(maxRadioStation,currentRadioStation,on);
+        Radio radio = new Radio(maxRadioStation,0,currentRadioStation,
+                100,0,0,on);
         radio.prev();
 
         assertEquals(expected, radio.getCurrentRadioStation());
@@ -29,8 +31,9 @@ public class RadioTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/dataForInput.csv")
     void inputRadioStation(int maxRadioStation, int currentRadioStation, boolean on, int expected) {
-        Radio radio = new Radio(maxRadioStation,currentRadioStation,on);
-        radio.setCurrentRadioStation(currentRadioStation);
+        Radio radio = new Radio(maxRadioStation,0,currentRadioStation,
+                100,0,0,on);
+        radio.inputUser();
 
         assertEquals(expected, radio.getCurrentRadioStation());
     }
@@ -38,7 +41,8 @@ public class RadioTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/dataForIn.csv")
     void increaseSoundVolume(boolean on, int currentSoundVolume, int expected) {
-        Radio radio = new Radio(on, currentSoundVolume);
+        Radio radio = new Radio(10,0,0,
+                100,0,currentSoundVolume,on);
         radio.increaseSoundVolume();
 
         assertEquals(expected, radio.getCurrentSoundVolume());
@@ -47,7 +51,8 @@ public class RadioTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/dataForDec.csv")
     void decreaseSoundVolume(boolean on, int currentSoundVolume, int expected) {
-        Radio radio = new Radio(on, currentSoundVolume);
+        Radio radio = new Radio(10,0,0,
+                100,0,currentSoundVolume,on);
         radio.decreaseSoundVolume();
 
         assertEquals(expected, radio.getCurrentSoundVolume());
